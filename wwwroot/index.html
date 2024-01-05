@@ -10,10 +10,13 @@
         </h1>
         <P>
             intitally the page will load with an image of a pokemon directly from my assets vault repo
+            the pokemon are keyed on ID so you can change the numebr to get a different image (001 to 801) - note 3 digits required and not going to be validated e.g 001 not 1!
             you can use the drop down lists to pick the height and width from these drop downs and press submit
             <b>this page is still in development - it does not yet resize the image, just changes the params on the url</b>
         </P>
         <form onsubmit="event.preventDefault(); GetResizedImage()">
+            <label for="poke">pokemeon id:</label><br>
+            <input type="number" id="poke" name="poke" value="433" min="001" max="801"><br>
             <label for="width">width:</label><br>
             <input type="text" id="width" name="width" value="100"><br>
             <label for="height">height:</label><br>
@@ -22,13 +25,17 @@
             <input type="submit" value="Submit">
         </form>
         <!-- <img src="https://assets.trickey.solutions/pokeassets/433.png" id="IMAGE"> -->
+        <p>img src="<span id="imglbl"></span>"</p>
         <img src="" id="IMAGE">
         <script>
+            GetResizedImage()
             function GetResizedImage() {
                 const h = document.getElementById('height').value;
                 const w = document.getElementById('width').value;
+                const p = document.getElementById('poke').value;
                 //var image =  fetch(`https://assets.trickey.solutions/pokeassets/433.png?h=${h}&w=${w}`)
-                document.getElementById("IMAGE").src=`https://assets.trickey.solutions/pokeassets/433.png?h=${h}&w=${w}`;
+                document.getElementById("IMAGE").src=`https://assets.trickey.solutions/pokeassets/${p}.png?h=${h}&w=${w}`;
+                document.getElementById("imglbl").innerHTML = `${document.getElementById("IMAGE").src}`
             }
         </script>
 
