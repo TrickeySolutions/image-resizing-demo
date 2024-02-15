@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>
+            image-resizing-demo
+        </title>
+    </head>
+    <body>
+        <h1>
+            This page will demonstrate cloudflare image resizing
+        </h1>
+        <P>
+            intitally the page will load with an image of a mosnter<br>
+            you can replace this with any image<br>
+            you can use the drop down lists to pick the height and width from these drop downs and press submit<br>
+            <b>note that images will always maintain aspect ratio and will never increase time image size</b>
+        </P>
+        <form onsubmit="event.preventDefault(); GetResizedImage()">
+            <!-- <label for="poke">pokemeon id:</label><br>
+            <input type="number" id="poke" name="poke" value="433" min="001" max="801"><br> -->
+            <label for="image">pokemeon id:</label><br>
+            <input type="text" id="image" name="image" value="https://assets.trickey.solutions/monsters/dotty.png"><br>
+            <label for="width">width:</label><br>
+            <input type="text" id="width" name="width" value="100"><br>
+            <label for="height">height:</label><br>
+            <input type="text" id="height" name="height" value="100"><br>
+            <label for="quality">quality:</label><br>
+            <input type="number" id="quality" name="quality" value="100" min="0" max="100"><br>
+            <label for="fit">fit:</label><br>
+            <select type="text" id="fit" name="fit" value="100">
+                <option value="scale-down">scale-down</option>
+                <option value="crop">crop</option>
+                <option value="pad">pad</option>
+                <option value="cover">cover</option>
+                <option value="contain">contain</option>
+            </select><br>
+            <label for="format">format:</label><br>
+            <select type="text" id="format" name="format" value="100">
+                <option value="auto">auto</option>
+                <option value="avif">avif</option>
+                <option value="webp">webp</option>
+                <option value="jpeg">jpeg</option>
+                <option value="baseline-jpeg">baseline-jpeg</option>
+                <option value="json">json</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <!-- <img src="https://assets.trickey.solutions/pokeassets/433.png" id="IMAGE"> -->
+        <p>img src="<span id="imglbl"></span>"</p>
+        <img src="" id="IMAGE">
+        <script>
+            GetResizedImage()
+            function GetResizedImage() {
+                const h = document.getElementById('height').value;
+                const w = document.getElementById('width').value;
+                const p = document.getElementById('image').value;
+                const f = document.getElementById('fit').value;
+                const q = document.getElementById('quality').value;
+                const format = document.getElementById('format').value;
+                //var image =  fetch(`https://assets.trickey.solutions/pokeassets/433.png?h=${h}&w=${w}`)
+                document.getElementById("IMAGE").src=`https://imagesize.trickey.solutions/cdn-cgi/image/width=${w}&height=${h}&fit=${f}&quality=${q}&format=${format}/${p}`;
+                document.getElementById("imglbl").innerHTML = `${document.getElementById("IMAGE").src}`
+                
+            }
+        </script>
+
+    </body>
+</html>
